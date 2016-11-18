@@ -23,9 +23,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private Movie movie;
 
     ImageView moviePoster;
-    TextView movieTitle;
-    TextView releasingDate;
-    TextView overView;
+    TextView movieTitle, releasingDate, overView;
     RatingBar ratingBar;
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -36,6 +34,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
+        initializeView();
+
+        //get data passed from bundle
+        movie = getIntent().getExtras().getBundle(MOVIE_OBJECT_BUNDLE).getParcelable(MOVIES_OBJECT);
+
+        setToolbar();
+        setData();
+    }
+
+    private void initializeView() {
         moviePoster = (ImageView) findViewById(R.id.img_movie_poster);
         movieTitle = (TextView) findViewById(R.id.tv_movie_title);
         releasingDate = (TextView) findViewById(R.id.tv_releasing_date);
@@ -44,11 +52,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         floatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-
-
-        movie = getIntent().getExtras().getBundle(MOVIE_OBJECT_BUNDLE).getParcelable(MOVIES_OBJECT);
-        setToolbar();
-        setData();
     }
 
     private void setData() {
